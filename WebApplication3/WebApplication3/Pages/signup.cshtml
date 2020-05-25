@@ -1,0 +1,55 @@
+@page
+@model SignupModel
+@{
+  ViewData["Title"] = "Signup";
+}
+
+<div class="container">  
+    <h2>Signup</h2>  
+    <hr />  
+    <br />  
+    <b>@Model.message</b>
+    <form action="signupProcess" method="get">
+
+        <div class="row">
+            <div class="col-md-4">
+                <label>Email:</label>
+                <input asp-for="_email" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Password:</label>
+                <input asp-for="_password" class="form-control" type="password" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>First Name:</label>
+                <input asp-for="_firstName" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Middle Name:</label>
+                <input asp-for="_middleName" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Last Name:</label>
+                <input asp-for="_lastName" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Phone:</label>
+                <input asp-for="_phone" class="form-control" />
+            </div>
+        </div>
+
+        <br />
+        <input type="submit" value="Signup" class="btn btn-primary" />
+    </form>
+</div>
+

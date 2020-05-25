@@ -1,0 +1,119 @@
+﻿@using Microsoft.AspNetCore.Http;
+@{
+    var firstName = Context.Session.GetString("firstName");
+    var role = Context.Session.GetString("role");
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Order Management System</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .table td, table th {
+            text-align: left;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown-container {
+            position: relative;
+            display: inline-block;
+        }
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 130px;
+            box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 0px 0 10px 10px;
+        }
+        /* Show the dropdown menu on hover */
+        .dropdown-container:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">Order Management System</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (role != null && role.Equals("admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/editServices">Services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/displayCustomers">Customers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/displayStats">Sales Statistics</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/displayOrders">Orders</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/displayServices">Services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/addToCart">Cart</a>
+                            </li>
+                        }
+
+
+                        @if (firstName == null || firstName.Equals("null"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/getLogin">Login</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="dropdown-container nav-item ">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/">Howdey, @firstName</a>
+                                <div class="dropdown-content">
+                                    @if (role != null && role.Equals("customer"))
+                                    {
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/displayUserOrders">Past Orders</a>
+                                    }
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/signout">Sign out</a>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - Order Management System - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

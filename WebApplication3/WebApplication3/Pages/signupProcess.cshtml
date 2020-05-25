@@ -1,0 +1,35 @@
+﻿@page
+@model SignupProcessModel
+@{
+    ViewData["Title"] = "User Information";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">User Information</h1>
+
+        @{
+            if (@Model.EX != null)
+            {
+            <h3>**ERROR: @Model.EX.Message</h3>
+            <br />
+            <hr />
+            <br />
+            <br />
+            }
+        }
+        <br />
+        <b>@Model.message</b>
+        <br />
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>Username</td>
+                    <td>@Model.user.email</td>
+                </tr>
+                <tr>
+                    <td>Role</td>
+                    <td>@Model.user.role</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>

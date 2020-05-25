@@ -1,0 +1,97 @@
+﻿@page
+@model displayStatsModel
+@{
+    ViewData["Title"] = "Sales Statistics";
+    var orderItems = Newtonsoft.Json.JsonConvert.SerializeObject(Model.orderItems);
+    var services = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Services);
+    var quantities = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Quantities);
+}
+
+<div class="text-center">
+    <h1 class="display-4">Sales Statistics</h1>
+    @{
+        if (@Model.EX != null)
+        {
+            <h3>**ERROR: @Model.EX.Message</h3>
+            <br />
+            <hr />
+            <br />
+            <br />
+        }
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Service Name
+                </th>
+                <th>
+                    Sales
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.orderItems)
+            {
+                <tr>
+                    <td>
+                        @item.service.serviceName
+                    </td>
+                    <td>
+                        @item.quantity
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="box-body">
+    <div class="chart-container">
+        <canvas id="bar-chart" width="800" height="450"></canvas>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+
+<script>
+    new Chart(document.getElementById("bar-chart"), {
+        type: 'bar',
+        data: {
+          labels: @Html.Raw(services),
+          datasets: [
+            {
+              label: "Quantity",
+              data: @Html.Raw(quantities)
+            }
+          ]
+        },
+        options: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: 'Sales Per Service'
+            }, 
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Service',
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Quantity'
+                    }, 
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+</script>

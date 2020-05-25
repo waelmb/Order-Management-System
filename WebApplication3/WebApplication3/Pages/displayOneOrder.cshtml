@@ -1,0 +1,62 @@
+﻿@page
+@model displayOneOrderModel
+@{
+    ViewData["Title"] = "View Order";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Order #@Model.order.orderId</h1>
+        @{
+            if (@Model.EX != null)
+            {
+                <h3>**ERROR: @Model.EX.Message</h3>
+                <br />
+                <hr />
+                <br />
+                <br />
+            }
+        }
+    <div style="text-align: left;">
+        <br />
+        <b>Customer Name: @Model.order.fullName</b>
+        <br />
+        <b>Customer Email: @Model.order.email</b>
+        <br />
+        <b>Customer Phone: @Model.order.phone</b>
+        <br />
+    </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Service Name
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+
+                    <th>
+                        Service Price
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.order.items)
+                {
+                    <tr>
+                        <td>
+                            @item.service.serviceName
+                        </td>
+                        <td>
+                            @item.quantity
+                        </td>
+                        <td>
+                            @item.service.servicePrice rub.
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+        <b>Total Price: @Model.order.total rub.</b>
+    </div>

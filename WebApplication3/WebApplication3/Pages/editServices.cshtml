@@ -1,0 +1,65 @@
+﻿@page
+@model editServicesModel
+@{
+    ViewData["Title"] = "Services";
+    var services = Newtonsoft.Json.JsonConvert.SerializeObject(Model.services);
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Services</h1>
+        @{
+            if (@Model.EX != null)
+            {
+                <h3>**ERROR: @Model.EX.Message</h3>
+                <br />
+                <hr />
+                <br />
+                <br />
+            }
+        }
+    <a asp-page="/getService" class="nav-link">
+        <span class="ProductListItem">
+            <b>Add Service</b>
+        </span>
+    </a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Service Name
+                </th>
+                <th>
+                    Service Description
+                </th>
+
+                <th>
+                    Service Price
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.services)
+            {
+            <tr>
+                <td>
+                    @item.serviceName
+                </td>
+                <td>
+                    @item.serviceDescription
+                </td>
+                <td>
+                    @item.servicePrice rub.
+                </td>
+                <td>
+                    <a asp-page="/editServices" asp-route-input="1" asp-route-serviceId="@item.serviceId" class="nav-link">
+                        <span class="ProductListItem">
+                            <b>Delete</b>
+                        </span>
+                    </a>
+                </td>
+            </tr>
+
+            }
+        </tbody>
+    </table>
+    </div>

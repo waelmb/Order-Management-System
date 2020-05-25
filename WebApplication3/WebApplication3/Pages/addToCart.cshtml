@@ -1,0 +1,75 @@
+﻿@page
+@model addToCartModel
+@{
+    ViewData["Title"] = "Add to Cart";
+    var orderItems = Newtonsoft.Json.JsonConvert.SerializeObject(Model.orderItems);
+}
+@using Microsoft.AspNetCore.Http;
+
+<div class="text-center">
+    @if (HttpContext.Session.GetString("firstName") == null || HttpContext.Session.GetString("firstName").Equals("null"))
+    {
+        <h1 class="display-4">Shopping Cart</h1>
+    }
+    else
+    {
+        <h1 class="display-4">@HttpContext.Session.GetString("firstName")'s Shopping Cart</h1>
+    }
+
+    @{
+        if (@Model.EX != null)
+        {
+            <h3>**ERROR: @Model.EX.Message</h3>
+            <br />
+            <hr />
+            <br />
+            <br />
+        }
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Service Name
+                </th>
+                <th>
+                    Quantity
+                </th>
+
+                <th>
+                    Service Price
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.orderItems)
+            {
+                <tr>
+                    <td>
+                        @item.service.serviceName
+                    </td>
+                    <td>
+                        @item.quantity
+                    </td>
+                    <td>
+                        @item.service.servicePrice rub.
+                    </td>
+                    <td>
+                        <a asp-page="/addToCart" asp-route-input="2" asp-route-inputId="@item.service.serviceId" class="nav-link">
+                            <span class="ProductListItem">
+                                <b>Delete</b>
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+    <b>Total Price: @Model.totalPrice rub.</b>
+    <a asp-page="/Order" asp-route-input="1" asp-route-inputId="-1" class="nav-link">
+        <span class="ProductListItem">
+            <b>Confirm Order</b>
+        </span>
+    </a>
+</div>

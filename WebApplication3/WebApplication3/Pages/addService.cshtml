@@ -1,0 +1,20 @@
+﻿@page
+@model addServiceModel
+@{
+    ViewData["Title"] = "Add Service";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Add Services</h1>
+        @{
+            if (@Model.EX != null)
+            {
+                <h3>**ERROR: @Model.EX.Message</h3>
+                <br />
+                <hr />
+                <br />
+                <br />
+            }
+        }
+        <b>@Model.message</b>
+    </div>

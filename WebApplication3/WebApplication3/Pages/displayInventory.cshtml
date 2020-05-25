@@ -1,0 +1,45 @@
+﻿@page
+@model displayInventoryModel
+@{
+    ViewData["Title"] = "Inventory";
+    var firstNames = Newtonsoft.Json.JsonConvert.SerializeObject(Model.firstNames);
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Inventory</h1>
+        Name: "@Model.InputName"
+        <br />
+        Price: "@Model.InputPrice"
+        <br />
+        @{
+            if (@Model.EX != null)
+            {
+                <h3>**ERROR: @Model.EX.Message</h3>
+                <br />
+                <hr />
+                <br />
+                <br />
+            }
+        }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    First Name
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.firstNames)
+            {
+                <tr>
+                    <td>
+                        @item
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+    </div>

@@ -1,0 +1,71 @@
+﻿@page
+@model displayOrdersModel
+@{
+    ViewData["Title"] = "Orders";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Orders</h1>
+        @{
+            if (@Model.EX != null)
+            {
+                <h3>**ERROR: @Model.EX.Message</h3>
+                <br />
+                <hr />
+                <br />
+                <br />
+            }
+        }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Order #
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Phone
+                </th>
+                <th>
+                    Total
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.orders)
+            {
+            <tr>
+                <td>
+                    @item.orderId
+                </td>
+                <td>
+                    @item.fullName
+                </td>
+                <td>
+                    @item.email
+                </td>
+                <td>
+                    @item.phone
+                </td>
+                <td>
+                    @item.total rub.
+                </td>
+                <td>
+                    <a asp-page="/displayOneOrder" asp-route-orderId="@item.orderId"  class="nav-link">
+                        <span class="ProductListItem">
+                            <b>View Order</b>
+                        </span>
+                    </a>
+                </td>
+            </tr>
+
+            }
+        </tbody>
+    </table>
+    </div>

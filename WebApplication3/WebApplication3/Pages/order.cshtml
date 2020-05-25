@@ -1,0 +1,57 @@
+﻿@page
+@model orderModel
+@{
+    ViewData["Title"] = "Order";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Review Order</h1>
+        @{
+            if (@Model.EX != null)
+            {
+                <h3>**ERROR: @Model.EX.Message</h3>
+                <br />
+                <hr />
+                <br />
+                <br />
+            }
+        }
+        <b>Order Confirmed!</b>
+        <a asp-page="order" asp-page-handler="Receipt" asp-route-inputId="@Model.OrderId">Download Receipt</a>
+        <br />
+        <b>Order #: @Model.OrderId</b>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Service Name
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+
+                    <th>
+                        Service Price
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.orderItems)
+                {
+                    <tr>
+                        <td>
+                            @item.service.serviceName
+                        </td>
+                        <td>
+                            @item.quantity
+                        </td>
+                        <td>
+                            @item.service.servicePrice rub.
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+        <b>Total Price: @Model.totalPrice rub.</b>
+    </div>

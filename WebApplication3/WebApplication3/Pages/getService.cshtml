@@ -1,0 +1,36 @@
+@page
+@model getServiceModel
+@{
+  ViewData["Title"] = "Add Service";
+}
+
+<div class="container">  
+    <h2>Add Service</h2>  
+    <hr />  
+    <br />  
+    <b>@Model.message</b>
+		<form action="addService" method="get">
+				
+        <div class="row">  
+            <div class="col-md-4">  
+                <label>Service Name: </label>  
+                <input asp-for="serviceName" class="form-control" />  
+            </div>  
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Service Description:</label>
+                <input asp-for="serviceDescription" class="form-control"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Service Price:</label>
+                <input asp-for="servicePrice" class="form-control" />
+            </div>
+        </div>		
+        <br />  
+        <input type="submit" value="Add" class="btn btn-primary" />  				
+    </form>
+</div>
+

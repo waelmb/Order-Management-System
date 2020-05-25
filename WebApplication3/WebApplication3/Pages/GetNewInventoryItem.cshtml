@@ -1,0 +1,32 @@
+@page
+@model GetNewInventoryItemModel
+@{
+  ViewData["Title"] = "Get New Inventory Item";
+}
+
+<div class="container">  
+    <h2>Add to Inventory</h2>  
+    <hr />  
+    <br />  
+		<form action="displayInventory" method="get">
+				
+        <div class="row">  
+            <div class="col-md-4">  
+                <label asp-for="Input">Enter name:</label>  
+                <input asp-for="Input" class="form-control" />  
+            </div>  
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label asp-for="Input2">Enter price:</label>
+                <input asp-for="Input2" class="form-control" />
+            </div>
+        </div>
+				
+        <br />  
+        <input type="submit" value="Lookup" class="btn btn-primary" />  
+        <a class="btn btn-default" href="/">Cancel</a>  
+				
+    </form>
+</div>
+

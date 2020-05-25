@@ -1,0 +1,20 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@using Microsoft.AspNetCore.Http;
+
+    <div class="text-center">
+        @if (HttpContext.Session.GetString("firstName") == null || HttpContext.Session.GetString("firstName").Equals("null"))
+        {
+            <h1 class="display-4">Welcome!</h1>
+        }
+        else
+        {
+            <h1 class="display-4">Welcome!, @HttpContext.Session.GetString("firstName").</h1>
+        }
+
+
+        <p>This is an order management system along with an inventory.</p>
+    </div>

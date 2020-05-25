@@ -1,0 +1,64 @@
+﻿@page
+@model displayCustomersModel
+@{
+    ViewData["Title"] = "Customers";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Customers</h1>
+        @{
+            if (@Model.EX != null)
+            {
+                <h3>**ERROR: @Model.EX.Message</h3>
+                <br />
+                <hr />
+                <br />
+                <br />
+            }
+        }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Middle Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Phone
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.customers)
+            {
+            <tr>
+                <td>
+                    @item.firstName
+                </td>
+                <td>
+                    @item.middleName
+                </td>
+                <td>
+                    @item.lastName
+                </td>
+                <td>
+                    @item.email
+                </td>
+                <td>
+                    @item.phone
+                </td>
+            </tr>
+
+            }
+        </tbody>
+    </table>
+    </div>
